@@ -6,9 +6,10 @@ DB_NAME = "neo4j"
 class Neo4jDatabase():
   
   def __init__(self):
-    url = os.environ['CDISC_CT_SERVICE_NEO4J_URL']
-    usr = os.environ['CDISC_CT_SERVICE_NEO4J_USER']
-    pwd = os.environ['CDISC_CT_SERVICE_NEO4J_PWD']
+    url = os.environ['CDISC_BC_SERVICE_NEO4J_URL']
+    usr = os.environ['CDISC_BC_SERVICE_NEO4J_USER']
+    pwd = os.environ['CDISC_BC_SERVICE_NEO4J_PWD']
+    print("URL----",url)
     self.__repo = Repository(url, name=DB_NAME, user=usr, password=pwd)
 
   def repository(self):
