@@ -13,14 +13,22 @@ class FormThingy(Concept):
   # narrower = RelatedTo('SkosConcept', "NARROWER")
 
   @classmethod
-  def find_bc(cls):
+  def get_bcs(cls):
     db = Neo4jDatabase()
-    # query = """
-    #   MATCH (n) RETURN n limit 2
-    # """ % (parent_identifier, identifier)
-    query = f"""MATCH (n:SKOS_CONCEPT) RETURN n limit 2"""
+    query = f"""MATCH (bc:BC_INSTANCE) RETURN * limit 10"""
     print("query",query)
     results = db.graph().run(query)
-    # print("results",results)
-    # return json.loads(results)
+    return results
+
+  @classmethod
+  def get_bc_items(cls, bc):
+    db = Neo4jDatabase()
+    # query = f"""MATCH (bc:BC_INSTANCE)-[:HAS_ITEM]->(item) RETURN * limit 2"""
+    query = f"""
+MATCH (bc:BC_INSTANCE)-[:HAS_ITEM]->(item)
+where bc.name = "{bc}"
+RETURN item limit 10
+    """
+    print("query",query)
+    results = db.graph().run(query)
     return results

@@ -2,7 +2,7 @@ from typing import List
 from pydantic import BaseModel
 
 class Term(BaseModel):
-  # uuid: str
+  uuid: str = None
   uri: str
   # label: str
   identifier: str
@@ -10,3 +10,4 @@ class Term(BaseModel):
   # alt_label: List[str]
   pref_label: str
   definition: str
+
